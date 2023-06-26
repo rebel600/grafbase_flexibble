@@ -7,12 +7,17 @@ const User = g.model('User', {
   descrition: g.string(),
   githubUrl: g.url().optional(),
   linkedInUrl: g.url().optional(),
-  projects: g.relation(),
+  projects: g.relation(() => Projects).list().optional(),
 })
 
 const Projects = g.model('Projects', {
   title: g.string().length({min:3, max:20}),
   descrition: g.string(),
+  image: g.url(),
+  githubUrl: g.url(),
+  liveSiteUrl: g.url(),
+  category: g.string().search(),
+  createdBy: g.relation(() => User),
 })
 
 export default config({
